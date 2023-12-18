@@ -1,0 +1,185 @@
+
+body {
+    background-image: url('MK8Background.jpg');
+    background-repeat: repeat;
+    font-family: 'Cooper', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #f2f2f2;
+    animation: diagonalScroll 120s infinite;
+  }
+  
+  @keyframes diagonalScroll {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 1920px 1080px; /* Adjust values for desired diagonal movement */
+    }
+  }
+
+.back-box {
+    
+    top: 10;
+    left: 10;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('MK8Background.jpg');
+    background-repeat: repeat;
+    overflow: visible;
+    padding: 30px;
+    
+    box-sizing: border-box;
+  }
+  .black-box > * {
+    
+    margin: 0 auto;
+    max-width: 90%;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.9;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+  }
+header {
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 200%;
+    margin: 20px;
+}
+
+nav {
+    text-align: right;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    font-size: 24px;
+    margin: 0;
+    padding: 20;
+}
+h3 {
+    margin: 0 auto;
+    font-size: 24px;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    font-size: 175%;
+    margin: 0;
+    
+    
+}
+
+img {
+    width: 100%;
+    height: auto;
+    opacity: 1;
+}
+
+footer {
+    background-color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+}
+.intro {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0;
+    z-index: 0;
+    position: fixed;
+    animation: animate 2s;
+    animation-delay: 0s,2s;
+    
+   
+    
+  }
+   
+  
+  @keyframes animate {
+    
+    0% { 
+    z-index: 100;   
+    opacity: 1; 
+    
+    }
+    100% {
+     opacity: 0;
+     
+    }
+  }
+
+.graphs {
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+#scatterplot {
+    width: 25%;
+text-align: left;
+}
+
+#scatterplot2 {
+    width: 25%;
+    text-align: right;
+}
+.graphs2{
+    display: flex;
+    justify-content: space-evenly;
+}
+#scatterplot3{
+    width: 25%;
+    text-align: left;
+}
+#scatter plot4{
+    width: 25%;
+    text-align: left;
+}
+#slidingBox {
+    opacity: 1;
+    position: fixed;
+    z-index: 9999; /* Set a high z-index value to place it on top */
+    bottom: -120px; /* Initially hides the box */
+    right: 20px;
+    width: 300px;
+    background-image: url(download.jfif);
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: bottom 0.3s ease-in-out;
+  }
+ 
+
+  

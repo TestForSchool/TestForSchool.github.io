@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta
+ 
+  charset="UTF-8">
+  
+      
+  <meta
+   
+  name="viewport"
+   
+  content="width=device-width, initial-scale=1.0">
+  
+      
+  <title>MK8 Best Build</title>
+  
+      
+  <link
+   
+  rel="stylesheet"
+   
+  href="style.css">
+  
+  <script src="script.js"></script>
+  <script src="https://d3js.org/d3.v4.js"></script>
+
+</head>
+
+<style>
+  .axisWhite line {
+    stroke: white;
+  }
+
+  .axisWhite path {
+    stroke: white;
+  }
+
+  .axisWhite text {
+    fill: white;
+  }
+</style>
+
+
+
+<div class="intro">
+  <img src="Mk8loadtitle.jpg">
+</div>
+
+<body>
+ 
+  
+  <div class="black-box">
+
+  <h1 style="font-size: 400%;">The Best Mariokart8Deluxe Kart Combination According To<strong style="color: dodgerblue; font-size: 200%; text-decoration: underline;"> Science!</strong></h1>
+<p>Welcome to the exhilarating world of online Mario Kart 8 Deluxe! Whether you're a seasoned MK8 Deluxe veteran or it's your first time attempting to climb the ladder, every Mario Kart racer has asked themselves, 'What is the best kart combo, and how can I find it?' Luckily for you, I've discovered the most optimal combination that gives you a slight edge on the 150CC online ladder. This guide will cover how we scientifically calculated the best combination through analysis. So, rev those engines and let’s get geeky with the stats to find your unbeatable combination!</p>
+<div class="black-box">
+  
+  <h1 style="font-size: 300%; color:dodgerblue; text-decoration: underline;">Exploratory Data Analysis</h1>
+
+  <p>In order to find the best combination, we'll examine the stats of each character, kart, and tire independently using fan-compiled data. We're relying on fan-compiled data because some of our kart's stats are hidden in-game.</p>
+  </div>
+</div>
+<div class="black-box">
+  <p>Although each part has seven different attributes (Weight, Acceleration, Traction, Handling, Speed, Mini-Turbo, and Invincibility), we'll only focus on optimizing Speed, Acceleration, and Mini-Turbo. These three stats determine how fast we can complete any given online race.</p>
+</div>
+
+<div class="black-box">
+<div class="black-box">
+  <p style="text-align: left; margin: 0 auto;"><strong style="font-size: 180%; color:dodgerblue;">Speed:</strong> Determines the maximum velocity our kart can achieve. This allows us to complete tracks faster and create break-aways quickly.</p>
+  <p style="text-align: left; margin: 0 auto;"><strong style="font-size: 180%; color:dodgerblue;">Acceleration:</strong>  Determines how rapidly our kart can reach its maximum velocity. This lets us recover to top speed after getting hit with items.</p>
+  <p style="text-align: left; margin: 0 auto;"><strong style="font-size: 180%; color:dodgerblue;">Mini-Turbo:</strong> Determines both the speed of charging a boost from drifting and the duration of that boost. Mini-Turbo allows us to re-accelerate after each turn</p>
+
+  
+  <div class="black-box">
+  <h1 style="font-size: 300%; color:dodgerblue; text-decoration: underline;">Understanding The Stats</h1>
+<p>Before we can start doing calculations to find the best combination, it's essential to understand how the game stores and utilizes statistics</p>
+<p>In MK8DX, each component of a build—Character, Kart, Tires, and Glider—has a different distribution of stats ranging from 1 to 10.</p>
+<p>For example, the Bad Wagon -<img src="100px-BadwagonBodyMK8.png" style="opacity: 1; width: 90px; height: auto;">- 5 and a mini turbo of 0. In contrast, the Bitty Buggy -<img style="opacity: 1; width: 90px; height: auto;" src="150px-BiddybuggyBodyMK8.png" >- has a ground speed of 0 and a mini turbo of 7</p>
+<p>The game calculates your stats by taking the stats from each component of your build and adding all the values together</p>
+<p>Lets take this loadout below as an exsample:</p>
+<img src="GoldenExsample.png" style="opacity: 100%; width: 1000px; height: auto; display: block; margin: 0 auto;">
+<p>Looking at the stats for each part, we can determin that the combo has a speed (SG) stat of 17, an acceleration(AC) of 4 and a mini-turbo (MT) of 5 by adding up the values under each colum.</p>
+
+  <h1 style="font-size: 300%; color:dodgerblue; text-decoration: underline;">Calculating For The Best Combo</h1>
+  <p>Now that you have a basic understanding of what the speed, acceleration, and Mini-turbo, do and how the game uses those stats, we can start figuring out what the best combination is.</p>
+  <p>Rather than evaluating all 149,760 different possible combinations in Mario Kart 8 Deluxe through sheer brute force, we will implement a 3-step filtering method to narrow down the possibilities to the best ones.</p>
+  <p style="text-align: left;"><strong style="font-size: 180%; color:dodgerblue; text-decoration: underline;"> The Three Step Method:</strong></p>
+  <p style="text-align: left; font-size: 177; text-decoration: underline;"><strong style="font-size: 180%; color:dodgerblue; "> Step 1: </strong> Add the Speed and the Acceleration for each part</p>
+  
+    <p style="text-align: left;">Since both Speed and Acceleration are equally important, we aim for a favorable ratio between our Acceleration and Speed stats. We desire a high top speed for a swift finish, but we also avoid compromising how quickly we can reach that top speed after getting hit. To make an easy and accurate ranking of each part's ratio, we will calculate the sum of the Speed and Acceleration stats and rank these sums from highest to lowest.</p>
+    <p>The graphs below depict the distribution of these ratios.</p>
+    </div>
+    <div id="slidingBox">
+      <p>You can use your mouse to zoom in/out each graph.</p>
+    </div>
+    <script>
+      window.onscroll = function() {
+        var slidingBox = document.getElementById("slidingBox");
+        var scrollPosition = window.scrollY || document.documentElement.scrollTop;
+    
+        if (scrollPosition > 2200 && scrollPosition < 3300) {
+          slidingBox.style.bottom = "30px"; // Show the box when scrolled to a certain point
+        } else {
+          slidingBox.style.bottom = "-120px"; // Hide the box when scrolled further down
+        }
+      };
+    </script>
+    <div class="graphs">
+    <p style="font-size: 173%;">Character Speed+Acceleration</p>
+ 
+    <div id="scatterplot"></div>  
+
+    <p style="font-size: 173%;">Vehicle Speed+Acceleration</p>
+    <div id="scatterplot2"></div>
+  </div>
+  
+
+  <div class="graphs2">
+    
+    <p>Tire Speed+Acceleration</p>
+    <div id="scatterplot3"></div>  
+    
+    <p>Glider Speed+Acceleration</p>
+    <div id="scatterplot4"></div>
+    
+ 
+</div>
+</div>
+  <div class="black-box">
+    <p style="text-align: left;"> After calculating the Speed + Acceleration sums for each part, we'll allow only the parts with the highest Speed + Acceleration to progress to the next step, disregarding the rest.</p>
+    <p style="text-align: left; font-size: 177; text-decoration: underline;"><strong style="font-size: 180%; color:dodgerblue; "> Step 2: </strong> Sorting By Mini-Turbo</p>
+    <p style="text-align: left;">Next, we will sort all of the parts that have the highest speed+acceleration based on their mini-turbo stat value and only use the parts with the best mini-turbo stat
+      <p style="text-align: left; font-size: 177; text-decoration: underline;"><strong style="font-size: 180%; color:dodgerblue; "> Step 3: </strong> Putting it all together</p>
+      <p style="text-align: left;">For the third and final step all we need to do is use the parts we determined to be the best from steps one and two and start racing.</p>
+    
+      <h1 style="font-size: 300%; color:dodgerblue; text-decoration: underline;">The Best Combination</h1>
+    <!-- Your code here -->
+    <p>After finishing the three steps we have determined what the best Mariokart 8 deluxe build is! know that the best Mariokart8deluxe build is Waluigi <img src="96px-MK8_Waluigi_Icon.png" style="opacity: 1; width: 90px; height: auto;">, Donkykong <img src="96px-MK8_DKong_Icon.webp" style="opacity: 1; width: 90px; height: auto;">, or Roy <img src="96px-MK8_Roy_Icon.png" style="opacity: 1; width: 90px; height: auto;"> for your Character on the Biddy-Buggy <img src="150px-BiddybuggyBodyMK8.png" style="opacity: 1; width: 90px; height: auto;">or Mr.Scooty <img src="150px-MrScootyBodyMK8.png" style="opacity: 1; width: 90px; height: auto;">body with the roller tires <img src="150px-RollerTiresMK8.png" style="opacity: 1; width: 90px; height: auto;">and the Cloud <img src="150px-Cloud_Glider.png" style="opacity: 1; width: 90px; height: auto;"> or Paper glider <img src="150px-PaperGliderIcon-MK8.png" style="opacity: 1; width: 90px; height: auto;">.</p>
+    <p>The  Speed+Acceleration and mini-turbo stats for this build are shown below:</p>
+    <img src="BestGraph.png" style="opacity: 100%; width: 900px; height: auto; display: block; margin: 0 auto;">
+    <p>This Build makes alot of sense logicaly. Although Waluigi/Roy/Dk have a terrible mini-turbo stat of one, the Biddy-Buggy and Rollers have high enough mini-turbo stats to balence it out. So Waluigi/Roy/DK are super benificial because you get the perfect Speed+Acceleration stat of 10. </p>
+    <p style="font-size: 300%; color: blueviolet;">If you want to start winning online races consistently and easily start raising your VR, you should be using this build since it is scientifically, statistly,and logicaly the most optimal build.</p>
+  </div>
+
+  <script>
+
+    var margin = {top: 10, right: 30, bottom: 30, left: 30},
+      width = 460 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
+
+    var SVG = d3.select("#scatterplot")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.csv("https://raw.githubusercontent.com/TestForSchool/DataScience1/main/Final/MarioKartDriverStats.csv", function(data) {
+
+      SVG.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height - 6)
+        .text("Ground Speed");
+
+      SVG.append("text")
+        .attr("text-anchor", "end")
+        .attr("y", 6)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Acceleration");
+
+      d3.selectAll("text").attr("fill", "white");
+
+      var x = d3.scaleLinear()
+        .domain([0, 7])
+        .range([ 0, width ]);
+      var xAxis = SVG.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "axisWhite")
+        .call(d3.axisBottom(x));
+
+      var y = d3.scaleLinear()
+        .domain([0, 7])
+        .range([ height, 0]);
+      var yAxis = SVG.append("g")
+        .attr("class", "axisWhite")
+        .call(d3.axisLeft(y));
+
+      var clip = SVG.append("defs").append("SVG:clipPath")
+        .attr("id", "clip")
+        .append("SVG:rect")
+        .attr("width", width )
+        .attr("height", height )
+        .attr("x", 0)
+        .attr("y", 0);
+
+      var scatter = SVG.append('g')
+        .attr("clip-path", "url(#clip)")
+
+      var tooltip = d3.select("#scatterplot")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+
+      var mouseover = function(d) {
+        tooltip
+          .style("opacity", 1)
+      }
+
+      var mousemove = function(d) {
+        tooltip
+          .html("(" + d.Velocity + ", " + d.Amplitude + ")")
+          .style("left", (d3.mouse(this)[0]+90) + "px")
+          .style("top", (d3.mouse(this)[1]) + "px")
+      }
+
+      var mouseleave = function(d) {
+        tooltip
+          .transition()
+          .duration(200)
+          .style("opacity", 0)
+      }
+
+      // svg.append('g')
+      scatter
+        .selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+          .attr("cx", function (d) { return x(d.Ground_Speed); } )
+          .attr("cy", function (d) { return y(d.Acceleration); } )
+          .attr("r", 3)
+          .style("fill", "rgb(45, 165, 195)")
+          .style("opacity", 0.5)
+        .on("mouseover", mouseover )
+        .on("mousemove", mousemove )
+        .on("mouseleave", mouseleave )
+
+      var zoom = d3.zoom()
+        .scaleExtent([.5, 20])  // This control how much you can unzoom (x0.5) and zoom (x20)
+        .extent([[0, 0], [width, height]])
+        .on("zoom", updateChart);
+
+      SVG.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .style("fill", "none")
+        .style("pointer-events", "all")
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+        .call(zoom);
+
+      function updateChart() {
+
+        // recover the new scale
+        var newX = d3.event.transform.rescaleX(x);
+        var newY = d3.event.transform.rescaleY(y);
+
+        // update axes with these new boundaries
+        xAxis.call(d3.axisBottom(newX))
+        yAxis.call(d3.axisLeft(newY))
+
+          // update circle position
+        scatter
+          .selectAll("circle")
+          .attr('cx', function(d) {return newX(d.Ground_Speed)})
+          .attr('cy', function(d) {return newY(d.Acceleration)});
+      }
+    })
+    </script>
+    <script>
+
+      var margin = {top: 10, right: 30, bottom: 30, left: 30},
+        width = 460 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+  
+      var SVG2 = d3.select("#scatterplot2")
+        .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+          .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+  
+      d3.csv("https://raw.githubusercontent.com/TestForSchool/DataScience1/main/Final/MarioKartBodyStats.csv", function(data) {
+  
+        SVG2.append("text")
+          .attr("text-anchor", "end")
+          .attr("x", width)
+          .attr("y", height - 6)
+          .text("Ground Speed");
+  
+        SVG2.append("text")
+          .attr("text-anchor", "end")
+          .attr("y", 6)
+          .attr("dy", ".75em")
+          .attr("transform", "rotate(-90)")
+          .text("Acceleration");
+  
+        d3.selectAll("text").attr("fill", "white");
+  
+        var x = d3.scaleLinear()
+          .domain([0, 7])
+          .range([ 0, width ]);
+        var xAxis = SVG2.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .attr("class", "axisWhite")
+          .call(d3.axisBottom(x));
+  
+        var y = d3.scaleLinear()
+          .domain([0, 7])
+          .range([ height, 0]);
+        var yAxis = SVG2.append("g")
+          .attr("class", "axisWhite")
+          .call(d3.axisLeft(y));
+  
+        var clip = SVG2.append("defs").append("SVG:clipPath")
+          .attr("id", "clip")
+          .append("SVG:rect")
+          .attr("width", width )
+          .attr("height", height )
+          .attr("x", 0)
+          .attr("y", 0);
+  
+        var scatter = SVG2.append('g')
+          .attr("clip-path", "url(#clip)")
+  
+        var tooltip = d3.select("#scatterplot2")
+          .append("div")
+          .style("opacity", 0)
+          .attr("class", "tooltip")
+          .style("background-color", "white")
+          .style("border", "solid")
+          .style("border-width", "1px")
+          .style("border-radius", "5px")
+          .style("padding", "10px")
+  
+        var mouseover = function(d) {
+          tooltip
+            .style("opacity", 1)
+        }
+  
+        var mousemove = function(d) {
+          tooltip
+            .html("(" + d.Velocity + ", " + d.Amplitude + ")")
+            .style("left", (d3.mouse(this)[0]+90) + "px")
+            .style("top", (d3.mouse(this)[1]) + "px")
+        }
+  
+        var mouseleave = function(d) {
+          tooltip
+            .transition()
+            .duration(200)
+            .style("opacity", 0)
+        }
+  
+        // svg.append('g')
+        scatter
+          .selectAll("circle")
+          .data(data)
+          .enter()
+          .append("circle")
+            .attr("cx", function (d) { return x(d.Ground_Speed); } )
+            .attr("cy", function (d) { return y(d.Acceleration); } )
+            .attr("r", 3)
+            .style("fill", "rgb(45, 165, 195)")
+            .style("opacity", 0.5)
+          .on("mouseover", mouseover )
+          .on("mousemove", mousemove )
+          .on("mouseleave", mouseleave )
+  
+        var zoom = d3.zoom()
+          .scaleExtent([.5, 20])  // This control how much you can unzoom (x0.5) and zoom (x20)
+          .extent([[0, 0], [width, height]])
+          .on("zoom", updateChart);
+  
+        SVG2.append("rect")
+          .attr("width", width)
+          .attr("height", height)
+          .style("fill", "none")
+          .style("pointer-events", "all")
+          .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+          .call(zoom);
+  
+        function updateChart() {
+  
+          // recover the new scale
+          var newX = d3.event.transform.rescaleX(x);
+          var newY = d3.event.transform.rescaleY(y);
+  
+          // update axes with these new boundaries
+          xAxis.call(d3.axisBottom(newX))
+          yAxis.call(d3.axisLeft(newY))
+  
+            // update circle position
+          scatter
+            .selectAll("circle")
+            .attr('cx', function(d) {return newX(d.Ground_Speed)})
+            .attr('cy', function(d) {return newY(d.Acceleration)});
+        }
+      })
+      </script>
+<script>
+
+  var margin = {top: 10, right: 30, bottom: 30, left: 30},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+  var SVG3 = d3.select("#scatterplot3")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+  d3.csv("https://raw.githubusercontent.com/TestForSchool/TestForSchool.github.io/main/MarioKartWheelStats.csv", function(data) {
+
+    SVG3.append("text")
+      .attr("text-anchor", "end")
+      .attr("x", width)
+      .attr("y", height - 6)
+      .text("Ground Speed");
+
+    SVG3.append("text")
+      .attr("text-anchor", "end")
+      .attr("y", 6)
+      .attr("dy", ".75em")
+      .attr("transform", "rotate(-90)")
+      .text("Acceleration");
+
+    d3.selectAll("text").attr("fill", "white");
+
+    var x = d3.scaleLinear()
+      .domain([0, 7])
+      .range([ 0, width ]);
+    var xAxis = SVG3.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .attr("class", "axisWhite")
+      .call(d3.axisBottom(x));
+
+    var y = d3.scaleLinear()
+      .domain([0, 7])
+      .range([ height, 0]);
+    var yAxis = SVG3.append("g")
+      .attr("class", "axisWhite")
+      .call(d3.axisLeft(y));
+
+    var clip = SVG3.append("defs").append("SVG:clipPath")
+      .attr("id", "clip")
+      .append("SVG:rect")
+      .attr("width", width )
+      .attr("height", height )
+      .attr("x", 0)
+      .attr("y", 0);
+
+    var scatter = SVG3.append('g')
+      .attr("clip-path", "url(#clip)")
+
+    var tooltip = d3.select("#scatterplot3")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "1px")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+
+    var mouseover = function(d) {
+      tooltip
+        .style("opacity", 1)
+    }
+
+    var mousemove = function(d) {
+      tooltip
+        .html("(" + d.Velocity + ", " + d.Amplitude + ")")
+        .style("left", (d3.mouse(this)[0]+90) + "px")
+        .style("top", (d3.mouse(this)[1]) + "px")
+    }
+
+    var mouseleave = function(d) {
+      tooltip
+        .transition()
+        .duration(200)
+        .style("opacity", 0)
+    }
+
+    // svg.append('g')
+    scatter
+      .selectAll("circle")
+      .data(data)
+      .enter()
+      .append("circle")
+        .attr("cx", function (d) { return x(d.Ground_Speed); } )
+        .attr("cy", function (d) { return y(d.Acceleration); } )
+        .attr("r", 3)
+        .style("fill", "rgb(45, 165, 195)")
+        .style("opacity", 0.5)
+      .on("mouseover", mouseover )
+      .on("mousemove", mousemove )
+      .on("mouseleave", mouseleave )
+
+    var zoom = d3.zoom()
+      .scaleExtent([.5, 20])  // This control how much you can unzoom (x0.5) and zoom (x20)
+      .extent([[0, 0], [width, height]])
+      .on("zoom", updateChart);
+
+    SVG3.append("rect")
+      .attr("width", width)
+      .attr("height", height)
+      .style("fill", "none")
+      .style("pointer-events", "all")
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+      .call(zoom);
+
+    function updateChart() {
+
+      // recover the new scale
+      var newX = d3.event.transform.rescaleX(x);
+      var newY = d3.event.transform.rescaleY(y);
+
+      // update axes with these new boundaries
+      xAxis.call(d3.axisBottom(newX))
+      yAxis.call(d3.axisLeft(newY))
+
+        // update circle position
+      scatter
+        .selectAll("circle")
+        .attr('cx', function(d) {return newX(d.Ground_Speed)})
+        .attr('cy', function(d) {return newY(d.Acceleration)});
+    }
+  })
+  </script>
+  <script>
+
+    var margin = {top: 10, right: 30, bottom: 30, left: 30},
+      width = 460 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
+
+    var SVG4 = d3.select("#scatterplot4")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.csv("https://raw.githubusercontent.com/TestForSchool/TestForSchool.github.io/main/MarioKartGliderStats.csv", function(data) {
+
+      SVG4.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height - 6)
+        .text("Ground Speed");
+
+      SVG4.append("text")
+        .attr("text-anchor", "end")
+        .attr("y", 6)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Acceleration");
+
+      d3.selectAll("text").attr("fill", "white");
+
+      var x = d3.scaleLinear()
+        .domain([0, 7])
+        .range([ 0, width ]);
+      var xAxis = SVG4.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "axisWhite")
+        .call(d3.axisBottom(x));
+
+      var y = d3.scaleLinear()
+        .domain([0, 7])
+        .range([ height, 0]);
+      var yAxis = SVG4.append("g")
+        .attr("class", "axisWhite")
+        .call(d3.axisLeft(y));
+
+      var clip = SVG4.append("defs").append("SVG:clipPath")
+        .attr("id", "clip")
+        .append("SVG:rect")
+        .attr("width", width )
+        .attr("height", height )
+        .attr("x", 0)
+        .attr("y", 0);
+
+      var scatter = SVG4.append('g')
+        .attr("clip-path", "url(#clip)")
+
+      var tooltip = d3.select("#scatterplot4")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+
+      var mouseover = function(d) {
+        tooltip
+          .style("opacity", 1)
+      }
+
+      var mousemove = function(d) {
+        tooltip
+          .html("(" + d.Velocity + ", " + d.Amplitude + ")")
+          .style("left", (d3.mouse(this)[0]+90) + "px")
+          .style("top", (d3.mouse(this)[1]) + "px")
+      }
+
+      var mouseleave = function(d) {
+        tooltip
+          .transition()
+          .duration(200)
+          .style("opacity", 0)
+      }
+
+      // svg.append('g')
+      scatter
+        .selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+          .attr("cx", function (d) { return x(d.Ground_Speed); } )
+          .attr("cy", function (d) { return y(d.Acceleration); } )
+          .attr("r", 3)
+          .style("fill", "rgb(45, 165, 195)")
+          .style("opacity", 0.5)
+        .on("mouseover", mouseover )
+        .on("mousemove", mousemove )
+        .on("mouseleave", mouseleave )
+
+      var zoom = d3.zoom()
+        .scaleExtent([.5, 20])  // This control how much you can unzoom (x0.5) and zoom (x20)
+        .extent([[0, 0], [width, height]])
+        .on("zoom", updateChart);
+
+      SVG4.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .style("fill", "none")
+        .style("pointer-events", "all")
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+        .call(zoom);
+
+      function updateChart() {
+
+        // recover the new scale
+        var newX = d3.event.transform.rescaleX(x);
+        var newY = d3.event.transform.rescaleY(y);
+
+        // update axes with these new boundaries
+        xAxis.call(d3.axisBottom(newX))
+        yAxis.call(d3.axisLeft(newY))
+
+          // update circle position
+        scatter
+          .selectAll("circle")
+          .attr('cx', function(d) {return newX(d.Ground_Speed)})
+          .attr('cy', function(d) {return newY(d.Acceleration)});
+      }
+    })
+    </script>
+  <p></p>
+  
+</div>
+
+  <script src="https://d3js.org/d3.v4.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
